@@ -1,7 +1,7 @@
 
 module Main where
 
-import Data.List (findIndex, transpose)
+import Data.List (findIndex, transpose, elemIndex, intersect)
 
 histo :: Eq a => [a] -> [(a, Int)]
 histo = go [] where
@@ -21,11 +21,28 @@ check h = [findFreq 2, findFreq 3] where
     Just _  -> 1
     Nothing -> 0
 
+dist :: String -> String -> Int
+dist a b = length $ filter id $ zipWith (/=) a b
+
 main = do
-  ids <- lines <$> readFile "input"
-  let hs = fmap histo ids
+  bids <- lines <$> readFile "input"
+
+  let hs = fmap histo bids
       checked = fmap check hs
       [dubs, trips] = transpose checked
       checksum = sum dubs * sum trips
   putStrLn $ "Part 1: " ++ show checksum
+
+  let matrix = zipWith (\i bid -> (i, fmap (dist bid) (drop (i+1) bids))) [0..] bids
+      adjs = filter (\(i, row) -> 1 `elem` row) matrix
+      (idxA, row) = head adjs
+      Just offB = elemIndex 1 row
+      bidA = bids !! idxA
+      bidB = bids !! (idxA + offB + 1)
+      common = intersect bidA bidB
+
+  putStrLn $ "Part 2: Adjacent pairs: " ++ show (length adjs)
+  putStrLn $ "        (A: " ++ bidA ++ ") (B: " ++ bidB ++ ")"
+  putStrLn $ "        Common: " ++ common
+  putStrLn $ "        |A| - |Common| = " ++ show (length bidA - length common)
 
