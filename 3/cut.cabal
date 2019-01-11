@@ -1,0 +1,33 @@
+name:                   Cut
+version:                0.1.0.0
+license:                BSD3
+license-file:           LICENSE
+author:                 Rk
+build-type:             Simple
+extra-source-files:     ChangeLog.md
+cabal-version:          >=2.0
+
+executable Cut
+  default-language:     Haskell2010
+--default-extensions:   BangPatterns BinaryLiterals ConstraintKinds DataKinds
+--                      DefaultSignatures DeriveFoldable DeriveFunctor
+--                      DeriveGeneric DeriveLift DeriveTraversable
+--                      DerivingStrategies EmptyCase FlexibleContexts
+--                      FlexibleInstances FunctionalDependencies GADTs
+--                      GeneralizedNewtypeDeriving InstanceSigs LambdaCase
+--                      MultiWayIf NoMonomorphismRestriction NamedFieldPuns
+--                      OverloadedStrings PatternSynonyms RankNTypes
+--                      ScopedTypeVariables StandaloneDeriving TupleSections
+--                      TypeApplications TypeFamilyDependencies TypeOperators
+--                      ViewPatterns
+--ghc-options:          -Wextra -Wcompat -Wincomplete-record-updates
+--                      -Wincomplete-uni-patterns -Wredundant-constraints
+--                      -Wno-missing-signatures -Wno-name-shadowing
+--                      -funbox-small-strict-fields -threaded
+
+  build-depends:          base           == 4.12.*
+                        , vector         == 0.12.*
+
+--hs-source-dirs:       src
+  main-is:              cut.hs
+
